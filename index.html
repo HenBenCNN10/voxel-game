@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KandyKaneKraft - The Ultimate Voxel Adventure</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #gameContainer {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #ui {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      font-size: 18px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+    }
+
+    #crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .crosshair-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #hotbar {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .hotbar-slot {
+      width: 50px;
+      height: 50px;
+      background: rgba(100, 100, 100, 0.8);
+      border: 2px solid #fff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .hotbar-slot:hover {
+      background: rgba(150, 150, 150, 0.8);
+      transform: scale(1.1);
+    }
+
+    .hotbar-slot.active {
+      border-color: #ffff00;
+      background: rgba(255, 215, 0, 0.3);
+    }
+
+    #stats {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 14px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+      font-family: 'Courier New', monospace;
+    }
+
+    #instructions {
+      position: absolute;
+      bottom: 100px;
+      right: 20px;
+      color: white;
+      font-size: 13px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #ff69b4;
+      z-index: 10;
+      max-width: 250px;
+    }
+
+    .instruction-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #ff69b4;
+    }
+
+    .instruction-item {
+      margin: 4px 0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <canvas id="gameCanvas"></canvas>
+    <div id="ui">
+      <h1>🍭 KandyKaneKraft 🍬</h1>
+      <p>Welcome to the Sweet Adventure!</p>
+    </div>
+    <div id="crosshair">
+      <div class="crosshair-dot"></div>
+    </div>
+    <div id="hotbar">
+      <div class="hotbar-slot active">🍬</div>
+      <div class="hotbar-slot">🍫</div>
+      <div class="hotbar-slot">🍮</div>
+      <div class="hotbar-slot">🍭</div>
+      <div class="hotbar-slot">🧁</div>
+      <div class="hotbar-slot">🌪️</div>
+      <div class="hotbar-slot">🏔️</div>
+      <div class="hotbar-slot">💧</div>
+    </div>
+    <div id="stats">
+      <div>FPS: <span id="fps">60</span></div>
+      <div>Chunks: <span id="chunks">1</span></div>
+      <div>Blocks: <span id="blocks">0</span></div>
+    </div>
+    <div id="instructions">
+      <div class="instruction-title">🎮 CONTROLS</div>
+      <div class="instruction-item">W/A/S/D - Move</div>
+      <div class="instruction-item">SPACE - Jump</div>
+      <div class="instruction-item">Mouse - Look Around</div>
+      <div class="instruction-item">Left Click - Destroy Block</div>
+      <div class="instruction-item">Right Click - Place Block</div>
+      <div class="instruction-item">1-8 - Block Selection</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@r128/build/three.module.js",
+        "cannon": "https://cdn.jsdelivr.net/npm/cannon@0.20.0/build/cannon.js"
+      }
+    }
+  </script>
+  <script type="module" src="src/index.js"></script>
+</body>
+</html>

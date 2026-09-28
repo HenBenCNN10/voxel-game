@@ -1,0 +1,19 @@
+{
+  "name": "kandykanekraft",
+  "version": "1.0.0",
+  "description": "A high-quality voxel game with candy/sweet themed blocks and mechanics",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "esbuild src/index.js --bundle --outfile=dist/bundle.js"
+  },
+  "dependencies": {
+    "three": "^r128",
+    "cannon": "^0.20.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.0"
+  }
+}
